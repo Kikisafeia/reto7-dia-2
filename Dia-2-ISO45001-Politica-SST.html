@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Día 2 - Política SST y Liderazgo - Reto ISO 45001 con IA</title>
+<style>
+  :root {
+    --color-primary: #38bdf8;
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-accent: #fbbf24;
+    --color-success: #10b981;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    padding: 1rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  .header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    border: 3px solid var(--color-accent);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: "👔";
+    position: absolute;
+    font-size: 4rem;
+    opacity: 0.1;
+    top: -10px;
+    right: 20px;
+  }
+  .header h1 { font-size: 2rem; color: var(--color-accent); margin-bottom: 0.5rem; }
+  .header p { color: var(--color-text-secondary); }
+  .badge {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #0f172a;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+  .clausula-badge {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.2);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+  .card {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 2px solid rgba(56, 189, 248, 0.3);
+  }
+  .section-title {
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .objective {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--color-primary);
+  }
+  .steps {
+    background: rgba(15, 23, 42, 0.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .steps ol { margin-left: 1.5rem; color: var(--color-text-secondary); }
+  .steps li { margin-bottom: 0.8rem; line-height: 1.6; }
+  .prompt-container {
+    background: #0f172a;
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .prompt-label { color: var(--color-primary); font-weight: 600; font-size: 1.1rem; }
+  .copy-btn {
+    background: var(--color-primary);
+    color: #0f172a;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+  }
+  .copy-btn:hover { background: #7dd3fc; transform: scale(1.05); }
+  .copy-btn:active { transform: scale(0.95); }
+  .prompt-text {
+    color: var(--color-text);
+    background: rgba(30, 41, 59, 0.5);
+    padding: 1.5rem;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    white-space: pre-wrap;
+  }
+  .checkin-box {
+    background: rgba(251, 191, 36, 0.1);
+    border-left: 4px solid var(--color-accent);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+  }
+  .checkin-title { color: var(--color-accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem; }
+  .checkin-questions { color: var(--color-text-secondary); line-height: 2; }
+  .tip-box {
+    background: rgba(56, 189, 248, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+  .tip-box strong { color: var(--color-primary); }
+  .cta-button {
+    display: block;
+    background: var(--color-primary);
+    color: #0f172a;
+    text-align: center;
+    padding: 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    transition: all 0.3s;
+  }
+  .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(56, 189, 248, 0.3); }
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .doc-card {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .doc-card .doc-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .doc-card .doc-name { color: var(--color-success); font-size: 0.85rem; font-weight: 600; }
+  .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--color-primary);
+    color: #0f172a;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateX(0); }
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.5rem; }
+    .prompt-header { flex-direction: column; align-items: flex-start; }
+    .copy-btn { margin-top: 0.5rem; width: 100%; }
+    .docs-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>DÍA 2 - LIDERAZGO Y POLÍTICA SST</h1>
+    <p style="color: var(--color-text-secondary); margin-top: 0.5rem">Reto 7 Días: ISO 45001 con IA</p>
+    <span class="badge">15 MINUTOS</span><br>
+    <span class="clausula-badge">📋 Cláusula 5 — ISO 45001</span>
+  </div>
+
+  <div class="card">
+    <span class="section-title">🎯 Objetivo del día</span>
+    <div class="objective">
+      Redactar una Política SST lista para firmar + definir roles y responsabilidades en 15 minutos, con lenguaje ISO 45001 aplicado a tu empresa real.
+    </div>
+
+    <span class="section-title">📄 Documentos que generarás hoy</span>
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="doc-icon">📜</div>
+        <div class="doc-name">Política SST lista para firmar</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">👥</div>
+        <div class="doc-name">Matriz de roles y responsabilidades SST</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">✅</div>
+        <div class="doc-name">Compromisos de la dirección (Cláusula 5.1)</div>
+      </div>
+    </div>
+
+    <span class="section-title">✅ Pasos simples</span>
+    <div class="steps">
+      <ol>
+        <li><strong>Copia el PROMPT</strong> usando el botón de abajo</li>
+        <li><strong>Pégalo en ChatGPT o Perplexity</strong></li>
+        <li><strong>Reemplaza EMPRESA, RUBRO, TRABAJADORES y PAÍS</strong><br>
+          <em style="color: var(--color-accent)">Ejemplo EMPRESA: "Constructora Norte S.A." o "Planta de Alimentos XYZ"</em><br>
+          <em style="color: var(--color-accent)">Ejemplo RUBRO: "construcción civil" o "manufactura de alimentos"</em><br>
+          <em style="color: var(--color-accent)">Ejemplo TRABAJADORES: "120 trabajadores, 80% operativos en terreno"</em>
+        </li>
+        <li><strong>Revisa y firma</strong> — la política debe ser validada y firmada por la gerencia</li>
+      </ol>
+    </div>
+
+    <span class="section-title">🎯 Prompt para copiar</span>
+    <div class="prompt-container">
+      <div class="prompt-header">
+        <span class="prompt-label">📋 PROMPT ESPECÍFICO</span>
+        <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+      </div>
+      <div class="prompt-text" id="prompt">Actúa como consultor experto en Sistemas de Gestión de Seguridad y Salud en el Trabajo con certificación en ISO 45001 y 15 años de experiencia en implementación de SG-SST en empresas industriales y de servicios.
+
+CONTEXTO: Necesito desarrollar los documentos clave de la Cláusula 5 de ISO 45001 (Liderazgo y Participación de los Trabajadores) para mi organización.
+
+EMPRESA: [Nombre de la empresa o tipo: ej. "Constructora Norte S.A.", "Planta de manufactura", "Empresa de servicios logísticos"]
+RUBRO: [Sector: ej. construcción civil, manufactura alimentos, minería, servicios, retail]
+TRABAJADORES: [Cantidad y características: ej. 120 trabajadores, 80 operativos en terreno, 3 turnos]
+PAÍS: [Tu país para referencias normativas: Chile, México, Colombia, España, Argentina, Perú, etc.]
+
+INSTRUCCIONES:
+
+1. POLÍTICA DE SEGURIDAD Y SALUD EN EL TRABAJO (Cláusula 5.2)
+Redactar una Política SST completa que cumpla con todos los requisitos de ISO 45001:
+- Apropiada al propósito, tamaño y contexto de la organización
+- Incluir compromiso de proporcionar condiciones de trabajo seguras
+- Incluir compromiso de eliminar peligros y reducir riesgos SST
+- Incluir compromiso de cumplimiento de requisitos legales aplicables
+- Incluir compromiso de mejora continua del SG-SST
+- Incluir compromiso de consulta y participación de los trabajadores
+- Redactar en primera persona de la dirección (Gerente General o equivalente)
+- Extensión: máximo 1 página, lenguaje claro y directo
+- Formato: lista de compromisos + párrafo final con firma
+- Espacio para fecha y firma del máximo representante
+
+2. COMPROMISOS DE LA DIRECCIÓN (Cláusula 5.1)
+Generar lista de compromisos específicos y verificables de la alta dirección con:
+- Responsabilidad y rendición de cuentas del SG-SST
+- Asignación de recursos (humanos, financieros, tecnológicos)
+- Comunicación de la importancia de la gestión SST
+- Apoyo a otros roles de dirección
+- Promoción de la mejora continua
+- Protección de trabajadores frente a represalias al reportar incidentes
+Para cada compromiso: DESCRIPCIÓN + CÓMO SE EVIDENCIA + FRECUENCIA DE REVISIÓN
+
+3. MATRIZ DE ROLES Y RESPONSABILIDADES SST (Cláusula 5.3)
+Crear tabla con los siguientes cargos (adaptar al contexto de la empresa):
+- Gerente General / Alta Dirección
+- Gerente de Operaciones / Producción
+- Jefe de Seguridad / Prevencionista
+- Supervisores / Capataces
+- Trabajadores en general
+- Comité Paritario (si aplica por normativa del país)
+- Contratistas / Subcontratistas
+
+Para cada cargo incluir:
+| Cargo | Responsabilidades SST | Autoridad | Rendición de cuentas |
+
+4. PARTICIPACIÓN Y CONSULTA DE TRABAJADORES (Cláusula 5.4)
+Generar procedimiento simplificado para:
+- Canales de participación (reuniones, buzón, aplicaciones)
+- Mecanismos de consulta antes de cambios
+- Participación en identificación de peligros (IPER)
+- Participación en investigación de incidentes
+- Representación en el Comité SST
+
+5. CHECKLIST DE CUMPLIMIENTO CLÁUSULA 5
+Generar lista de verificación con todos los requisitos de la Cláusula 5:
+| Requisito ISO 45001 | Cumple / Parcial / No cumple | Evidencia requerida | Responsable |
+
+REFERENCIAS NORMATIVAS DE [TU PAÍS]:
+- Incluir artículos legales específicos aplicables al liderazgo y responsabilidades SST
+- Mencionar organismos reguladores relevantes
+
+REQUISITOS:
+- Política SST lista para imprimir y firmar (no borrador)
+- Roles adaptados al tamaño real de la empresa
+- Lenguaje técnico pero comprensible para la dirección
+- Compromisos medibles y verificables (no declaraciones vacías)
+- Coherencia entre política, roles y participación
+
+Genera los 5 documentos de la Cláusula 5 ahora.</div>
+    </div>
+
+    <div class="tip-box">
+      <strong>TIP PRO:</strong> Después de generar, pide <em>"adapta la política SST a formato oficial con membrete"</em> o <em>"genera acta de aprobación de la política para firma de gerencia"</em> para tener todo listo para auditoría.
+    </div>
+  </div>
+
+  <div class="checkin-box">
+    <div class="checkin-title">✅ CHECK-IN (Responde en nas.io)</div>
+    <div class="checkin-questions">
+      1. ¿Para qué tipo de empresa generaste la Política SST?<br>
+      2. ¿Cuántos roles/cargos quedaron en tu matriz de responsabilidades? <strong>__</strong> cargos<br>
+      3. ¿La política generada está lista para presentar a tu gerencia? <strong>Sí / Con ajustes / No</strong>
+    </div>
+    <a href="https://nas.io/comunidadsafeia" class="cta-button" target="_blank">
+      📱 Hacer Check-in en nas.io
+    </a>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem; color: var(--color-text-secondary); font-size: 0.9rem;">
+    <strong>Comparte tu Política SST (sin datos confidenciales)</strong> en el chat comunitario para recibir feedback 👇
+  </div>
+
+</div>
+
+<div class="toast" id="toast">✅ Prompt copiado al portapapeles!</div>
+
+<script>
+function copyPrompt() {
+  const promptText = document.getElementById('prompt').textContent;
+  navigator.clipboard.writeText(promptText).then(() => {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }).catch(() => alert('Prompt copiado: ' + promptText));
+}
+</script>
+</body>
+</html>
